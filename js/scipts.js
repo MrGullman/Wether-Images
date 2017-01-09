@@ -7,6 +7,7 @@ $(document).ready(function(){
     
     var cityName = $('#cityName').val();
     getCity(cityName);
+    getImages(cityName);
     $('#cityName').val("");
   })
   
@@ -30,22 +31,19 @@ $(document).ready(function(){
  function getCity(city){
     $.get("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=98607e305c6ce579f817cf36c9aaa852&lang=se", function(data){
       var icon = data.weather[0].icon; // få ut väder icon värde
-      temp = data.main.temp-273.15; // omvandla kelvin till celcius
+      var temp = data.main.temp-273.15; // omvandla kelvin till celcius
+      var weatherType = data.weather[0].main;
       $('.city').text(data.name);
       $('.country').text(data.sys.country);
       $('.temp').text(temp.toFixed(1));
       $('.description').text(data.weather[0].description);
       getIcon(icon);
       console.log(data);
+      getImages(weatherType);
     })
  }
-  
-  if($('#btnDiv').hasClass('rotated')){
-   $('#btnDiv').removeClass('rotated')
-}else{
-  $('#btnDiv').addClass('rotated')
-}
-  
+
+
   //-------------------------------------------------------------------
   
   // Get weather icon
@@ -221,9 +219,32 @@ $(document).ready(function(){
   
   //--------------------------------------------------------------
   
-  // Get country name
+  // Get Flicker Images
   
-  
+    
+    function getImages(weather){
+      
+        var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=7512756ec3e4421c47b92a59361f1a96&per_page=20&tags=" + weather + "&extras=url_c%2C+url_m"
+        var weather = weather;
+
+        $.getJSON(url + "&format=json&jsoncallback=?", function(data){
+          
+          var photoHTML = '<ul>';
+          $.each(data.photos.photo, function(i, photo){
+            photoHTML += '<li>';
+            photoHTML += '<img src="' + photo.url_c + '"></li>';
+          });
+            photoHTML += '</ul>';
+          $('#photos').html(photoHTML);
+          
+          
+          console.log(data.photos);
+        });
+      
+    };
+    
+   
+    
   
   //--------------------------------------------------------------
   
