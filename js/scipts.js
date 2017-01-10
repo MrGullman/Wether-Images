@@ -16,7 +16,19 @@ $(document).ready(function(){
   
   // Få anvndarens plats
 
-  $.get("https://ipinfo.io", function(data){
+  //google api key AIzaSyAURTte8yk14_alvZGWHSHeNlMAbuML8LQ
+  
+  $(function() {
+    $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+      function(json) {
+        var myIP = json.ip;
+        return myIP;
+        console.log("My public IP address is: ", json.ip);
+      }
+    );
+  });
+  
+  $.getJSON("https://ipapi.co/json/", function(data){
       console.log(data);
       city = data.city;
       getCity(city);
@@ -224,11 +236,11 @@ $(document).ready(function(){
     
     function getImages(weather){
       
-        var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=7512756ec3e4421c47b92a59361f1a96&per_page=20&tags=" + weather + "&extras=url_c%2C+url_m"
+        var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=9bb1ef3285f869282ecc5e8ff9526ad5&per_page=20&tags=" + weather + "&extras=url_c%2C+url_m"
         var weather = weather;
 
         $.getJSON(url + "&format=json&jsoncallback=?", function(data){
-          
+          console.log(data);
           var photoHTML = '<ul>';
           $.each(data.photos.photo, function(i, photo){
             photoHTML += '<li>';
