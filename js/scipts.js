@@ -16,7 +16,7 @@ $(document).ready(function(){
   
   // Få anvndarens plats
 
-  $.get("https://ipapi.io", function(data){
+  $.get("https://ipapi.io/JSON", function(data){
       console.log(data);
       city = data.city;
       getCity(city);
