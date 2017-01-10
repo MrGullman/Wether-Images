@@ -16,7 +16,7 @@ $(document).ready(function(){
   
   // Få anvndarens plats
 
-  $.get("http://ip-api.com/json", function(data){
+  $.get("http://ipinfo.io", function(data){
       console.log(data);
       city = data.city;
       getCity(city);
