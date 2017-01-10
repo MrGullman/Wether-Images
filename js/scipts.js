@@ -16,6 +16,7 @@ $(document).ready(function(){
   
   // Få anvndarens plats
 
+<<<<<<< HEAD
   //google api key AIzaSyAURTte8yk14_alvZGWHSHeNlMAbuML8LQ
   
   $(function() {
