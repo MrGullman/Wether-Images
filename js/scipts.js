@@ -17,8 +17,16 @@ $(document).ready(function(){
   // Få anvndarens plats
 
   //google api key AIzaSyAURTte8yk14_alvZGWHSHeNlMAbuML8LQ
+                     
+
   
-  $(function() {
+  
+  /*$.getJSON("https://maps.googleapis.com/maps/api/js?key=AIzaSyD1JJlYtKmUiDi2hiEXw4spN5r4jLqDZGU&callback=initMap?q='halmstad'", function(data){
+    console.log(data);
+  }),*/
+  
+  
+  /*$(function() {
     $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
       function(json) {
         var myIP = json.ip;
@@ -27,6 +35,7 @@ $(document).ready(function(){
       }
     );
   });
+  */
   
   $.getJSON("https://ipapi.co/json/", function(data){
       console.log(data);
@@ -41,17 +50,24 @@ $(document).ready(function(){
   // få ut väderdatan
   
  function getCity(city){
-    $.get("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=98607e305c6ce579f817cf36c9aaa852&lang=se", function(data){
-      var icon = data.weather[0].icon; // få ut väder icon värde
-      var temp = data.main.temp-273.15; // omvandla kelvin till celcius
-      var weatherType = data.weather[0].main;
-      $('.city').text(data.name);
-      $('.country').text(data.sys.country);
-      $('.temp').text(temp.toFixed(1));
-      $('.description').text(data.weather[0].description);
-      getIcon(icon);
+      
+    /*$.get("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=98607e305c6ce579f817cf36c9aaa852&lang=se", function(data)*/
+    $.get("https://api.apixu.com/v1/current.json?key=e5c6bcdb884f449e97904419171101&q=" + city +"", function(data){
       console.log(data);
-      getImages(weatherType);
+      //var icon = data.weather[0].icon; // få ut väder icon värde
+      //var temp = data.main.temp-273.15; // omvandla kelvin till celcius
+      //var weatherType = data.weather[0].main;
+      $('.city').text(data.location.name);
+      $('.country').text(data.location.country);
+      //$('.temp').text(temp.toFixed(1));
+      $('.temp').text(data.current.temp_c);
+      console.log(data.current.condition.text);
+      $('.description').text(data.current.condition.text);
+      var icon = data.current.condition.icon
+      $('.icon').append("<img src=" + icon + ">");
+      //getIcon(icon);
+      console.log(data);
+      //getImages(weatherType);
     })
  }
 
