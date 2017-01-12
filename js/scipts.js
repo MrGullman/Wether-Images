@@ -64,12 +64,13 @@ $(document).ready(function(){
       $('.temp').text(data.current.temp_c);
       console.log(data.current.condition.text);
       $('.description').text(data.current.condition.text);
-      var icon = data.current.condition.code
+      var icon = data.current.condition.code;
+      var dayOrNight = data.current.is_day;
       console.log(data.current.condition.code);
       //$('.icon').append("<img src=" + icon + ">");
       getIcon(icon);
 
-      getImages(city);
+      getImages(city, dayOrNight);
     })
  }
 
@@ -78,175 +79,7 @@ $(document).ready(function(){
   
   // Get weather icon
   
-  function getIcon(icon){
-    switch(icon){
-      case "01d":
-        if($('.icon').has('img')){
-          $('.icon img').remove();
-          $('.icon').append('<img src="img/sunny.png">');
-        } else {
-          $('.icon').append('<img src="img/sunny.png">');
-        }
-        break;
-        
-      case "01n":
-        if($('.icon').has('img')){
-          $('.icon img').remove();
-          $('.icon').append('<img src="img/sunny_night.png">');
-        } else {
-          $('.icon').append('<img src="img/sunny_night.png">');
-        }
-        break;
-        
-      case "02d":
-        if($('.icon').has('img')){
-          $('.icon img').remove();
-          $('.icon').append('<img src="img/cloudy1.png">');
-        } else {
-          $('.icon').append('<img src="img/cloudy1.png">');
-        }
-        break;
-        
-      case "02n":
-        if($('.icon').has('img')){
-          $('.icon img').remove();
-          $('.icon').append('<img src="img/cloudy1_night.png">');
-        } else {
-          $('.icon').append('<img src="img/cloudy1_night.png">');
-        }
-        break;
-        
-      case "03d":
-        if($('.icon').has('img')){
-          $('.icon img').remove();
-          $('.icon').append('<img src="img/cloudy2.png">');
-        } else {
-          $('.icon').append('<img src="img/cloudy2.png">');
-        }
-        break;
-        
-      case "03n":
-        if($('.icon').has('img')){
-          $('.icon img').remove();
-          $('.icon').append('<img src="img/cloudy2_night.png">');
-        } else {
-          $('.icon').append('<img src="img/cloudy2_night.png">');
-        }
-        break;
-        
-      case "04d":
-        if($('.icon').has('img')){
-          $('.icon img').remove();
-          $('.icon').append('<img src="img/cloudy5.png">');
-        } else {
-          $('.icon').append('<img src="img/cloudy5.png">');
-        }
-        break;
-        
-      case "04n":
-        if($('.icon').has('img')){
-          $('.icon img').remove();
-          $('.icon').append('<img src="img/cloudy5.png">');
-        } else {
-          $('.icon').append('<img src="img/cloudy5.png">');
-        }
-        break;
-        
-      case 1183:
-        if($('.icon').has('img')){
-          $('.icon img').remove();
-          $('.icon').append('<img src="img/shower3.png">');
-        } else {
-          $('.icon').append('<img src="img/shower3.png">');
-        }
-        break;
-        
-      case "09n":
-        if($('.icon').has('img')){
-          $('.icon img').remove();
-          $('.icon').append('<img src="img/shower3.png">');
-        } else {
-          $('.icon').append('<img src="img/shower3.png">');
-        }
-        break;
-        
-      case "10d":
-        if($('.icon').has('img')){
-          $('.icon img').remove();
-          $('.icon').append('<img src="img/shower2.png">');
-        } else {
-          $('.icon').append('<img src="img/shower2.png">');
-        }
-        break;
-        
-      case "10n":
-        if($('.icon').has('img')){
-          $('.icon img').remove();
-          $('.icon').append('<img src="img/shower2_night.png">');
-        } else {
-          $('.icon').append('<img src="img/shower2_night.png">');
-        }
-        break;
-        
-      case "11d":
-        if($('.icon').has('img')){
-          $('.icon img').remove();
-          $('.icon').append('<img src="img/tstorm1.png">');
-        } else {
-          $('.icon').append('<img src="img/tstorm1.png">');
-        }
-        break;
-        
-      case "11n":
-        if($('.icon').has('img')){
-          $('.icon img').remove();
-          $('.icon').append('<img src="img/tstorm1_night.png">');
-        } else {
-          $('.icon').append('<img src="img/tstorm1_night.png">');
-        }
-        break;
-        
-      case "13d":
-        if($('.icon').has('img')){
-          $('.icon img').remove();
-          $('.icon').append('<img src="img/snow3.png">');
-        } else {
-          $('.icon').append('<img src="img/snow3.png">');
-        }
-        break;
-        
-      case "13n":
-        if($('.icon').has('img')){
-          $('.icon img').remove();
-          $('.icon').append('<img src="img/snow3_night.png">');
-        } else {
-          $('.icon').append('<img src="img/snow3_night.png">');
-        }
-        break;
-        
-      case 1135:
-        if($('.icon').has('img')){
-          $('.icon img').remove();
-          $('.icon').append('<img src="img/fog.png">');
-        } else {
-          $('.icon').append('<img src="img/fog.png">');
-        }
-        break;
-        
-      case "50n":
-        if($('.icon').has('img')){
-          $('.icon img').remove();
-          $('.icon').append('<img src="img/fog_night.png">');
-        } else {
-          $('.icon').append('<img src="img/fog_night.png">');
-        }
-        break;
-        
-      default:
-        console.log("No World");
-        break;
-    }
-  }
+  
   
   //--------------------------------------------------------------
   
@@ -308,6 +141,14 @@ $(document).ready(function(){
     
 
   });
+  
+  $('#item').change(function(){
+    var capitalC = $('#item').val();
+    getCity(capitalC);
+    getImages(capitalC);
+    console.log(capitalC);
+  });
+  
   
   $('button').click(function(event){
     event.preventDefault();
