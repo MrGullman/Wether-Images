@@ -2,14 +2,14 @@ $(document).ready(function(){
   
  // ändra stad genom formuläret
   
-  $('#cityForm').submit(function(event){
+  /*$('#cityForm').submit(function(event){
     event.preventDefault();
     
     var cityName = $('#cityName').val();
     getCity(cityName);
     getImages(cityName);
     $('#cityName').val("");
-  })
+  })*/
   
   //------------------------------------------------------
   
@@ -39,7 +39,8 @@ $(document).ready(function(){
   
   $.getJSON("https://ipapi.co/json/", function(data){
       console.log(data);
-      city = data.city;
+      city = "stockholm";
+      //city = data.city;
       getCity(city);
     }, "jsonp");
   
@@ -63,11 +64,12 @@ $(document).ready(function(){
       $('.temp').text(data.current.temp_c);
       console.log(data.current.condition.text);
       $('.description').text(data.current.condition.text);
-      var icon = data.current.condition.icon
-      $('.icon').append("<img src=" + icon + ">");
-      //getIcon(icon);
-      console.log(data);
-      getImages(weatherType);
+      var icon = data.current.condition.code
+      console.log(data.current.condition.code);
+      //$('.icon').append("<img src=" + icon + ">");
+      getIcon(icon);
+
+      getImages(city);
     })
  }
 
@@ -150,7 +152,7 @@ $(document).ready(function(){
         }
         break;
         
-      case "09d":
+      case 1183:
         if($('.icon').has('img')){
           $('.icon img').remove();
           $('.icon').append('<img src="img/shower3.png">');
@@ -222,7 +224,7 @@ $(document).ready(function(){
         }
         break;
         
-      case "50d":
+      case 1135:
         if($('.icon').has('img')){
           $('.icon img').remove();
           $('.icon').append('<img src="img/fog.png">');
@@ -242,6 +244,7 @@ $(document).ready(function(){
         
       default:
         console.log("No World");
+        break;
     }
   }
   
@@ -252,7 +255,7 @@ $(document).ready(function(){
     
     function getImages(weather){
       
-        var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=9bb1ef3285f869282ecc5e8ff9526ad5&per_page=20&tags=" + weather + "&extras=url_c%2C+url_m"
+        var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=9bb1ef3285f869282ecc5e8ff9526ad5&per_page=20&tags=" + weather + "&extras=url_c%2C+url_m%2C+url_q"
         var weather = weather;
 
         $.getJSON(url + "&format=json&jsoncallback=?", function(data){
@@ -260,7 +263,7 @@ $(document).ready(function(){
           var photoHTML = '<ul>';
           $.each(data.photos.photo, function(i, photo){
             photoHTML += '<li>';
-            photoHTML += '<img src="' + photo.url_c + '"></li>';
+            photoHTML += '<img src="' + photo.url_m + '"></li>';
           });
             photoHTML += '</ul>';
           $('#photos').html(photoHTML);
@@ -275,6 +278,53 @@ $(document).ready(function(){
     
   
   //--------------------------------------------------------------
+  
+  
+  
+  
+  //--------------------------------Capital City-----------------
+  
+  var capitalList = [];
+  var option = "";
+  
+  $.get("https://restcountries.eu/rest/v1/all", function(data){
+
+    for(var i = 0; i < data.length; i++){
+      capitalList.push(data[i].capital);
+    };
+
+    
+    capitalList = capitalList.filter(Boolean).sort();
+    //console.log(capitalList.sort().length);
+    
+    //console.log(capitalList);
+    
+    for(var i = 0; i < capitalList.length; i++){
+      option += '<option value="' + capitalList[i] + '">' + capitalList[i] + '</option>';
+    };
+    
+
+    $('#item').append(option);
+    
+
+  });
+  
+  $('button').click(function(event){
+    event.preventDefault();
+    var capitalC = $('#item').val();
+    getCity(capitalC);
+    getImages(capitalC);
+    console.log($('#item').val())
+  });
+  
+  /*$('#cityForm').submit(function(event){
+    event.preventDefault();
+    
+    var cityName = $('#cityName').val();
+    getCity(cityName);
+    getImages(cityName);
+    $('#cityName').val("");
+  })*/
   
 
 });
