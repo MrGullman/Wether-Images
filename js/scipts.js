@@ -88,7 +88,7 @@ $(document).ready(function(){
     
     function getImages(weather){
       
-        var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=9bb1ef3285f869282ecc5e8ff9526ad5&per_page=20&tags=" + weather + "&extras=url_c%2C+url_m%2C+url_q"
+        var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=9bb1ef3285f869282ecc5e8ff9526ad5&per_page=30&tags=" + weather + "&extras=url_c%2C+url_m%2C+url_q"
         var weather = weather;
 
         $.getJSON(url + "&format=json&jsoncallback=?", function(data){
@@ -149,23 +149,6 @@ $(document).ready(function(){
     console.log(capitalC);
   });
   
-  
-  $('button').click(function(event){
-    event.preventDefault();
-    var capitalC = $('#item').val();
-    getCity(capitalC);
-    getImages(capitalC);
-    console.log($('#item').val())
-  });
-  
-  /*$('#cityForm').submit(function(event){
-    event.preventDefault();
-    
-    var cityName = $('#cityName').val();
-    getCity(cityName);
-    getImages(cityName);
-    $('#cityName').val("");
-  })*/
   
 
 });

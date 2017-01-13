@@ -1,0 +1,50 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.site-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  top: 0px;
+  left: 0px;
+  height: 100px;
+  background: #333;
+  width: 100%;
+}
+
+#main-content {
+  display: flex;
+}
+
+img {
+  height: 100%;
+  width: auto;
+}
+
+#photos {
+  position: relative;
+  display: flex;
+  
+}
+
+ul {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  flex: auto;
+  width: 25em;
+  height: 25em;
+  list-style: none;
+  overflow: hidden;
+}
