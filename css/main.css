@@ -34,8 +34,10 @@ option {
 }
 
 img {
-  height: 100%;
-  width: auto;
+  height: auto;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 #photos {
@@ -53,9 +55,9 @@ ul {
 }
 
 li {
-  flex: auto;
-  width: 25em;
-  height: 25em;
+  flex: 1 1 400px;
+  flex-wrap: wrap;
   list-style: none;
-  overflow: hidden;
+  margin: 0;
+  padding: 0;
 }

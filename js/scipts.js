@@ -88,7 +88,7 @@ $(document).ready(function(){
     
     function getImages(weather){
       
-        var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=9bb1ef3285f869282ecc5e8ff9526ad5&per_page=100&tags=" + weather + "&extras=url_c%2C+url_m%2C+url_q"
+        var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=9bb1ef3285f869282ecc5e8ff9526ad5&per_page=200&tags=" + weather + "&extras=url_c%2C+url_m%2C+url_q"
         
         var weather = weather;
 
@@ -102,7 +102,7 @@ $(document).ready(function(){
             for(var i in data.photos.photo){
               console.log(data.photos.photo[i].width_m)
               
-              if(data.photos.photo[i].width_m === "500"){
+              if(data.photos.photo[i].width_m === "500" && data.photos.photo[i].height_m === "333"){
                 imageArray.push(data.photos.photo[i].url_m)
               }
             }       
