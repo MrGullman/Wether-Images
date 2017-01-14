@@ -12,11 +12,23 @@ html, body {
 
 header {
   display: flex;
+	flex-direction: row;
+	justify-content: space-between;
   top: 0px;
   left: 0px;
   height: 100px;
   background: #333;
   width: 100%;
+}
+
+.logo {
+	align-self: center;
+	margin-left: 2em;
+}
+
+.logo img {
+	height: 4em;
+	width: auto;
 }
 
 select:required:invalid {
@@ -46,6 +58,26 @@ img {
   
 }
 
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-o-appearance: none;
+	-ms-appearance: none;
+	appearance: none;
+	
+	display: block;
+	margin: 30px 2em;
+	width: 25%;
+	font-size: 1.5em;
+	padding: 10px 50px 10px 10px;
+	background: url(../img/arrow_select.svg) no-repeat 95% center;
+	background-size: 0.7em;
+	align-self: center;
+	color: #fff;
+	border: none;
+	background-color: #4d4d4d;
+}
+
 ul {
   width: 100%;
   display: flex;
@@ -60,4 +92,37 @@ li {
   list-style: none;
   margin: 0;
   padding: 0;
+	margin-bottom: -4px;
+}
+
+#overlay {
+	display: flex;
+	background: rgba(0,0,0, 0.8);
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	width: 600px;
+	height: 400px;
+	z-index: 1000;
+}
+
+.overlay-header {
+	display: flex;
+	background-color: rgba(0,0,0, 0.8);
+	width: 100%;
+	height: 70px;
+}
+
+.overlay-header img {
+	margin: auto;
+	width: 70%;
+}
+
+#city {
+	align-self: center;
+	color: #fff;
+	font-size: 3em;
 }

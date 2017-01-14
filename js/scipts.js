@@ -58,7 +58,7 @@ $(document).ready(function(){
       //var icon = data.weather[0].icon; // få ut väder icon värde
       //var temp = data.main.temp-273.15; // omvandla kelvin till celcius
       var weatherType = data.current.condition.text;
-      $('.city').text(data.location.name);
+      $('#city').text(data.location.name);
       $('.country').text(data.location.country);
       //$('.temp').text(temp.toFixed(1));
       $('.temp').text(data.current.temp_c);

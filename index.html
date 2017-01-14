@@ -5,6 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Jquery Test Page</title>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+			<link rel="stylesheet" href="css/normalize.css">
       <link rel="stylesheet" href="css/animate.css">
       <link rel="stylesheet" href="css/main.css">
     </head>
@@ -12,9 +13,12 @@
   <body>
     <div class="site-wrapper">
       <header class="top-header">
-        <select id="item">
-          <option value="" disabled selected>Välj En Stad</option>
-        </select>
+					<div class="logo">
+						<img src="img/logo.svg">
+					</div>
+					<select id="item">
+						<option value="" disabled selected>Välj En Stad</option>
+					</select>
       </header>
     
     
@@ -38,8 +42,10 @@
     
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="js/overlay.js"></script>
     <script src="js/getWeaterIcons.js"></script>
     <script src="js/scipts.js"></script>
+		
     <!--<script src="js/flicker_test.js"></script>
     <script src="js/flicker.js"></script>-->
 
