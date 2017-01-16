@@ -40,6 +40,7 @@ $(document).ready(function(){
   $.getJSON("https://ipapi.co/json/", function(data){
       //console.log(data);
       city = "stockholm";
+      country = "SE";
       //city = data.city;
       getCity(city);
     }, "jsonp");
@@ -54,22 +55,22 @@ $(document).ready(function(){
       
     /*$.get("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=98607e305c6ce579f817cf36c9aaa852&lang=se", function(data)*/
     $.get("https://api.apixu.com/v1/current.json?key=e5c6bcdb884f449e97904419171101&q=" + city +"", function(data){
-      //console.log(data);
+      console.log(data);
       //var icon = data.weather[0].icon; // få ut väder icon värde
       //var temp = data.main.temp-273.15; // omvandla kelvin till celcius
       var weatherType = data.current.condition.text;
       $('#city').text(data.location.name);
-      $('.country').text(data.location.country);
+      $('#country').text(data.location.country);
       //$('.temp').text(temp.toFixed(1));
       $('.temp').text(data.current.temp_c);
       //console.log(data.current.condition.text);
       $('.description').text(data.current.condition.text);
-      var icon = data.current.condition.code;
+      var iconType = data.current.condition.code;
       var dayOrNight = data.current.is_day;
-      //console.log(data.current.condition.code);
+      var weatherConditionCode = data.current.condition.code;
       //$('.icon').append("<img src=" + icon + ">");
-      getIcon(icon);
-
+      getIcon(iconType, dayOrNight);
+      getWetherCondition(weatherConditionCode, dayOrNight);
       getImages(city, dayOrNight);
     })
  }
@@ -77,7 +78,26 @@ $(document).ready(function(){
 
   //-------------------------------------------------------------------
   
-  // Get weather icon
+  // Get weather condition
+  
+  
+  function getWetherCondition(code, dayOrNight){
+    
+    $.get("https://www.apixu.com/doc/conditions.json", function(data){
+      
+      for(var i = 0; i < data.length; i++){
+        if(code === data[i].code && dayOrNight === 1){
+          console.log(data[i].languages[28].day_text);
+        } else if (code === data[i].code && dayOrNight === 0) {
+          console.log(data[i].languages[28].night_text);
+        }
+      }
+      console.log(data);
+    })
+    
+  }
+    
+
   
   
   
@@ -100,7 +120,7 @@ $(document).ready(function(){
           // check image size
           for(var i = 0; i < data.photos.photo.length; i++){
             for(var i in data.photos.photo){
-              console.log(data.photos.photo[i].width_m)
+              //console.log(data.photos.photo[i].width_m)
               
               if(data.photos.photo[i].width_m === "500" && data.photos.photo[i].height_m === "333"){
                 imageArray.push(data.photos.photo[i].url_m)
@@ -108,7 +128,7 @@ $(document).ready(function(){
             }       
           }
           
-          console.dir(imageArray); 
+          //console.dir(imageArray); 
           
           var photoHTML = '<ul>';
           
@@ -159,11 +179,10 @@ $(document).ready(function(){
   var option = "";
   
   $.get("https://restcountries.eu/rest/v1/all", function(data){
-
     for(var i = 0; i < data.length; i++){
       capitalList.push(data[i].capital);
     };
-
+    
     
     capitalList = capitalList.filter(Boolean).sort();
     //console.log(capitalList.sort().length);

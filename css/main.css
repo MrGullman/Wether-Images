@@ -104,7 +104,7 @@ li {
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%,-50%);
-	width: 600px;
+	min-width: 600px;
 	height: 400px;
 	z-index: 1000;
 }
@@ -121,8 +121,45 @@ li {
 	width: 70%;
 }
 
+.info-header {
+  padding-top: 1.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.weather-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.weather-icon img {
+  
+}
+
+.weather-description {
+  
+}
+
 #city {
-	align-self: center;
+	align-self: flex-end;
 	color: #fff;
 	font-size: 3em;
+}
+
+#country {
+  align-self: flex-end;
+  padding-bottom: 6px;
+  padding-left: 1em;
+  color: #fff;
+  font-size: 1.5em;
+}
+
+#country::before {
+  content: '"';
+}
+
+#country::after {
+  content: '"';
 }
