@@ -27,14 +27,14 @@ $(document).ready(function(){
   
  function getWeather(city){
 
-    $.get("https://api.apixu.com/v1/forecast.json?key=e5c6bcdb884f449e97904419171101&q=" + city +"&days=4", function(data){
-      //console.log(data);
+    $.get("https://api.apixu.com/v1/forecast.json?key=e5c6bcdb884f449e97904419171101&q=" + city +"&days=5", function(data){
+      console.log(data);
       var weatherType = data.current.condition.text;
       var wind = data.current.wind_kph/3.6; // <- Hämtar ut vilken vindhastighet och gör om den till meter/sec
       var windDir = data.current.wind_dir;  // <- Hämtar ut värdet för vilken vindriktning
       var iconType = data.current.condition.code;   //  <-  Hämtar ut vilken icon som är till vädret
       var dayOrNight = data.current.is_day;   //  <-  Hämtar om det är dag eller natt
-      
+
       $('#city').text(data.location.name);
       $('#country').text(data.location.country);
       $('.temp').text(data.current.temp_c);
@@ -43,12 +43,12 @@ $(document).ready(function(){
       
       
       function weatherIcon(iconNumber, dayOrNight){
-        
+        //console.log(iconNumber);
         for(var i = 0; i < weatherCondition.length; i++){
           if(dayOrNight === 1){
             
             if(iconNumber === weatherCondition[i].code){
-              
+              //console.log(weatherCondition[i].code);
               if($('.weather-icon').has('img')){
                 $('.weather-icon img').remove();
                 $('.weather-icon').append('<img src="' + weatherCondition[i].day + '">');
@@ -74,6 +74,22 @@ $(document).ready(function(){
       }
       
       
+      function forecastWeather(icon){
+        console.log(icon);
+        for(var i = 0; i < weatherCondition.length; i++){
+          
+          //console.log(data.forecast.forecastday[i].day.condition.code);
+          if(icon === weatherCondition[i].code){
+            return weatherCondition[i].day
+            //console.log(weatherCondition[i].day); 
+            //console.log(weatherCondition[i].day);
+          }else{
+            
+          }
+        }
+
+      }
+      
       
       weatherIcon(iconType, dayOrNight);
       //console.log(iconType);
@@ -82,44 +98,48 @@ $(document).ready(function(){
       getImages(city, dayOrNight);
       getWindDirection(windDir);  // Get the wind direction
       //console.log(iconType);
-      upcomingWeather(iconType);
+      upcomingWeather(iconType); // <- Skickar typ of icon till upcomingWeather
       
       //----------------------------------------
       //  kommande 3 dagars väder
               
-        
+      
+      
+      
+      
         
         function upcomingWeather(iconType){
-          $('#comingForecast').remove();
+          //$('#comingForecast').remove();
           console.log("denna körs");
+          
           var comingDayForecast = "<ul>";
 
             for(var i = 0; i < data.forecast.forecastday.length; i++){
+              var iconTypeForecast = data.forecast.forecastday[i].day.condition.code;
+              
+              //console.log(data.forecast.forecastday[i].day.condition.code);
               comingDayForecast += "<li>";
+              comingDayForecast += '<img src="' + forecastWeather(iconTypeForecast) + '">';
               comingDayForecast += "<h3>" + data.forecast.forecastday[i].date + "</h3>";
+              comingDayForecast += '<p class="forecast-temp">' + data.forecast.forecastday[i].day.avgtemp_c + '</p>';
 
-              //if(dayOrNight === 0){
-
-                if(iconType === data.forecast.forecastday[i].day.condition.code){
-                    //if($(comingDayForecast).has('img')){
-                    //  $(comingDayForecast).remove('img');
-                      comingDayForecast += '<img src="' + weatherCondition[i].day + '">';
-                    } else {
-                      comingDayForecast += '<img src="' + weatherCondition[i].day + '">';
-                    }
-           
               comingDayForecast += "</li>";
+              
               //console.log(data.forecast.forecastday[i]);
             }
 
             comingDayForecast += "</ul>";
+          
+            forecastWeather(iconTypeForecast);
+          
+          
 
-            $('.info').append('<div id="comingForecast"></div>');
-            
-            $('#comingForecast').html(comingDayForecast);
-            
+            //$('.info').append('<div id="comingForecast"></div>');
             
             //$('#comingForecast').html(comingDayForecast);
+            
+            
+            $('#comingForecast').html(comingDayForecast);
         }
         
       

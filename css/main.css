@@ -257,4 +257,15 @@ li {
 
 #comingForecast li h3 {
   font-size: 0.7em;
+  margin-bottom: 0;
+}
+
+.forecast-temp {
+  margin-top: 0.4em;
+  font-size: 1.4em;
+}
+
+.forecast-temp::after {
+  content: " \2103";
+  font-size: 0.8em
 }
