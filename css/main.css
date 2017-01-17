@@ -78,6 +78,11 @@ select {
 	background-color: #4d4d4d;
 }
 
+option {
+  color: #fff;
+  font-size: 0.7em;
+}
+
 ul {
   width: 100%;
   display: flex;
@@ -97,7 +102,7 @@ li {
 
 #overlay {
 	display: flex;
-	background: rgba(0,0,0, 0.8);
+	background: rgba(0,0,0, 0.85);
 	position: fixed;
 	display: flex;
 	flex-direction: column;
@@ -105,7 +110,7 @@ li {
 	top: 50%;
 	transform: translate(-50%,-50%);
 	min-width: 600px;
-	height: 400px;
+	height: 450px;
 	z-index: 1000;
 }
 
@@ -122,16 +127,19 @@ li {
 }
 
 .info-header {
-  padding-top: 1.5em;
+  padding-top: 1.2em;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  
 }
 
 .weather-info {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
+  padding-top: 1em;
+  padding-left: 15%;
+  padding-right: 15%;
 }
 
 .weather-icon img {
@@ -139,17 +147,18 @@ li {
 }
 
 .weather-description {
-  
+  align-self: center;
+  width: 100%;
 }
 
 #city {
-	align-self: flex-end;
+	align-self: center;
 	color: #fff;
 	font-size: 3em;
 }
 
 #country {
-  align-self: flex-end;
+  align-self: center;
   padding-bottom: 6px;
   padding-left: 1em;
   color: #fff;
@@ -162,4 +171,90 @@ li {
 
 #country::after {
   content: '"';
+}
+
+.description {
+  color: #fff;
+  font-size: 1.7em;
+  text-align: right;
+}
+
+.temp {
+  color: #fff;
+  text-align: right;
+  font-size: 1.5em;
+  padding-top: 0.3em;
+}
+
+.temp::after {
+  content: " \2103";
+  font-size: 0.9em;
+}
+
+.wind-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.wind-direction {
+  position: relative;
+  display: block !important;
+}
+
+.wind-direction img{
+  position: absolute;
+  width: 13px;
+  /*padding-right: 15px;
+  padding-top: 10px;
+  transform-origin: 50% 50%;*/
+  top: 10px;
+  right: 10px;
+}
+
+.wind {
+  color: #fff;
+  text-align: right;
+  font-size: 1.5em;
+  padding-top: 0.3em;
+}
+
+.wind::after {
+  content: " ms";
+  font-size: 0.9em;
+}
+
+#comingForecast {
+  width: 100%;
+  display: flex;
+  padding-top: 1.5em;
+}
+
+#comingForecast ul{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+#comingForecast li {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  width: 100%;
+  text-align: center;
+}
+
+#comingForecast img {
+  align-self: center;
+  width: 30%;
+  
+}
+
+#comingForecast li:first-child {
+  display: none;
+}
+
+#comingForecast li h3 {
+  font-size: 0.7em;
 }

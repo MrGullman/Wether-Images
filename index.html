@@ -5,7 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Jquery Test Page</title>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-			<link rel="stylesheet" href="css/normalize.css">
+      <link rel="stylesheet" href="css/normalize.css">
       <link rel="stylesheet" href="css/animate.css">
       <link rel="stylesheet" href="css/main.css">
     </head>
@@ -13,12 +13,12 @@
   <body>
     <div class="site-wrapper">
       <header class="top-header">
-					<div class="logo">
-						<img src="img/logo.svg">
-					</div>
-					<select id="item">
-						<option value="" disabled selected>Välj En Stad</option>
-					</select>
+        <div class="logo">
+            <img src="img/logo.svg">
+        </div>
+        <select id="capitalCitys">
+            <option value="" disabled selected>Välj En Stad</option>
+        </select>
       </header>
     
     
@@ -27,12 +27,8 @@
       </div>
     </div>
     
-    
 
-    
-<!--<input class="ip" value="8.8.8.8">
-<button class="send">Go</button>-->
-    
+
     <div id="overlay">
       <div class="overlay-header">
         <img src="img/logo.svg">
@@ -46,29 +42,30 @@
           <div class="weather-icon"></div>
           <div class="weather-description">
             <div class="description"></div>
+            <div class="temp"></div>
+            <div class="wind-wrapper">
+              <div class="wind-direction">
+                <img src="img/arrow.svg">
+              </div>
+              <div class="wind"></div>
+            </div>
           </div>
+        </div>
+        
+        <div id="comingForecast">
         </div>
         
       </div>
     </div>
     
-   
-    
-<br><br>
-    <span class="city"></span>,
-    <span class="country"></span>,
-    <span class="temp"></span>,
-    <span class="description"></span>
-    <div class="icon"></div>
-    
     
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="js/getWeaterIcons.js"></script>
+    <script src="js/weatherCondition.js"></script>
+    <script src="js/windDirection.js"></script>
     <script src="js/scipts.js"></script>
 		
-    <!--<script src="js/flicker_test.js"></script>
-    <script src="js/flicker.js"></script>-->
+
 
   </body>
 </html>

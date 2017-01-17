@@ -1,85 +1,150 @@
 $(document).ready(function(){
   
- // ändra stad genom formuläret
-  
-  /*$('#cityForm').submit(function(event){
-    event.preventDefault();
-    
-    var cityName = $('#cityName').val();
-    getCity(cityName);
-    getImages(cityName);
-    $('#cityName').val("");
-  })*/
-  
-  //------------------------------------------------------
-  
-  
-  // Få anvndarens plats
 
-  //google api key AIzaSyAURTte8yk14_alvZGWHSHeNlMAbuML8LQ
-                     
-
+  //==============================================================
+  // Får ut landet du är i och dess huvudstad från ipapi Api
   
-  
-  /*$.getJSON("https://maps.googleapis.com/maps/api/js?key=AIzaSyD1JJlYtKmUiDi2hiEXw4spN5r4jLqDZGU&callback=initMap?q='halmstad'", function(data){
-    console.log(data);
-  }),*/
-  
-  
-  /*$(function() {
-    $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
-      function(json) {
-        var myIP = json.ip;
-        return myIP;
-        console.log("My public IP address is: ", json.ip);
-      }
-    );
-  });
-  */
   
   $.getJSON("https://ipapi.co/json/", function(data){
-      //console.log(data);
-      city = "stockholm";
-      country = "SE";
-      //city = data.city;
-      getCity(city);
-    }, "jsonp");
+      country = data.country;
+      getCurrentCountryCapitalCity(country);
+    });
   
-  //---------------------------------------------------------------------
-
-
-  
-  // få ut väderdatan
-  
- function getCity(city){
+  function getCurrentCountryCapitalCity(countryCode){
+    $.get("https://restcountries.eu/rest/v1/alpha?codes=" + countryCode + "", function(data){
+      var currentCapitalCity = data[0].capital;
       
-    /*$.get("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=98607e305c6ce579f817cf36c9aaa852&lang=se", function(data)*/
-    $.get("https://api.apixu.com/v1/current.json?key=e5c6bcdb884f449e97904419171101&q=" + city +"", function(data){
+      getWeather(currentCapitalCity);
       console.log(data);
-      //var icon = data.weather[0].icon; // få ut väder icon värde
-      //var temp = data.main.temp-273.15; // omvandla kelvin till celcius
+    })
+  }
+  
+  
+
+  //==============================================================
+  // Får ut väderdatan från apiu Api
+  
+  
+ function getWeather(city){
+
+    $.get("https://api.apixu.com/v1/forecast.json?key=e5c6bcdb884f449e97904419171101&q=" + city +"&days=4", function(data){
+      //console.log(data);
       var weatherType = data.current.condition.text;
+      var wind = data.current.wind_kph/3.6; // <- Hämtar ut vilken vindhastighet och gör om den till meter/sec
+      var windDir = data.current.wind_dir;  // <- Hämtar ut värdet för vilken vindriktning
+      var iconType = data.current.condition.code;   //  <-  Hämtar ut vilken icon som är till vädret
+      var dayOrNight = data.current.is_day;   //  <-  Hämtar om det är dag eller natt
+      
       $('#city').text(data.location.name);
       $('#country').text(data.location.country);
-      //$('.temp').text(temp.toFixed(1));
       $('.temp').text(data.current.temp_c);
-      //console.log(data.current.condition.text);
       $('.description').text(data.current.condition.text);
-      var iconType = data.current.condition.code;
-      var dayOrNight = data.current.is_day;
-      var weatherConditionCode = data.current.condition.code;
-      //$('.icon').append("<img src=" + icon + ">");
-      getIcon(iconType, dayOrNight);
-      getWetherCondition(weatherConditionCode, dayOrNight);
+      $('.wind').text(wind.toFixed(1)); //  <- Sätter antalet decimaler i vindhastigheten till 1
+      
+      
+      function weatherIcon(iconNumber, dayOrNight){
+        
+        for(var i = 0; i < weatherCondition.length; i++){
+          if(dayOrNight === 1){
+            
+            if(iconNumber === weatherCondition[i].code){
+              
+              if($('.weather-icon').has('img')){
+                $('.weather-icon img').remove();
+                $('.weather-icon').append('<img src="' + weatherCondition[i].day + '">');
+              } else {
+                $('.weather-icon').append('<img src="' + weatherCondition[i].day + '">');
+              }
+            }
+          } else {
+            
+            if(iconNumber === weatherCondition[i].code){
+              
+              if($('.weather-icon').has('img')){
+                $('.weather-icon img').remove();
+                $('.weather-icon').append('<img src="' + weatherCondition[i].night + '">');
+              } else {
+                $('.weather-icon').append('<img src="' + weatherCondition[i].night + '">');
+              }
+            }
+            
+          }
+        }
+        
+      }
+      
+      
+      
+      weatherIcon(iconType, dayOrNight);
+      //console.log(iconType);
+      //getIcon(iconType, dayOrNight);
+      getWetherCondition(iconType, dayOrNight);
       getImages(city, dayOrNight);
-    })
- }
+      getWindDirection(windDir);  // Get the wind direction
+      //console.log(iconType);
+      upcomingWeather(iconType);
+      
+      //----------------------------------------
+      //  kommande 3 dagars väder
+              
+        
+        
+        function upcomingWeather(iconType){
+          $('#comingForecast').remove();
+          console.log("denna körs");
+          var comingDayForecast = "<ul>";
 
+            for(var i = 0; i < data.forecast.forecastday.length; i++){
+              comingDayForecast += "<li>";
+              comingDayForecast += "<h3>" + data.forecast.forecastday[i].date + "</h3>";
 
-  //-------------------------------------------------------------------
+              //if(dayOrNight === 0){
+
+                if(iconType === data.forecast.forecastday[i].day.condition.code){
+                    //if($(comingDayForecast).has('img')){
+                    //  $(comingDayForecast).remove('img');
+                      comingDayForecast += '<img src="' + weatherCondition[i].day + '">';
+                    } else {
+                      comingDayForecast += '<img src="' + weatherCondition[i].day + '">';
+                    }
+           
+              comingDayForecast += "</li>";
+              //console.log(data.forecast.forecastday[i]);
+            }
+
+            comingDayForecast += "</ul>";
+
+            $('.info').append('<div id="comingForecast"></div>');
+            
+            $('#comingForecast').html(comingDayForecast);
+            
+            
+            //$('#comingForecast').html(comingDayForecast);
+        }
+        
+      
+      
+    })  // <- end AJAX get function
+ }  // <- end getWeather function
+
   
-  // Get weather condition
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+ //==============================================================
+  
+  //  Hämtar ut väderförhållandet
+  //  Här får vi ut väderinformationen på svenska
+  //  Samt att vi kollar om det är dag eller natt.
   
   function getWetherCondition(code, dayOrNight){
     
@@ -87,21 +152,17 @@ $(document).ready(function(){
       
       for(var i = 0; i < data.length; i++){
         if(code === data[i].code && dayOrNight === 1){
-          console.log(data[i].languages[28].day_text);
+          $('.description').text(data[i].languages[28].day_text);
         } else if (code === data[i].code && dayOrNight === 0) {
-          console.log(data[i].languages[28].night_text);
+          $('.description').text(data[i].languages[28].night_text);
         }
       }
-      console.log(data);
+      //console.log(data);
     })
     
-  }
-    
-
+  };
   
-  
-  
-  //--------------------------------------------------------------
+ //==============================================================
   
   // Get Flicker Images
   
@@ -116,7 +177,7 @@ $(document).ready(function(){
 
           
           var imageArray = [];
-          console.log(data);
+         //console.log(data);
           // check image size
           for(var i = 0; i < data.photos.photo.length; i++){
             for(var i in data.photos.photo){
@@ -128,7 +189,7 @@ $(document).ready(function(){
             }       
           }
           
-          //console.dir(imageArray); 
+ 
           
           var photoHTML = '<ul>';
           
@@ -140,70 +201,45 @@ $(document).ready(function(){
             photoHTML += '</ul>';
           $('#photos').html(photoHTML);
           
-          /*$.each(data.photos.photo, function(i, photo){
-            photoHTML += '<li>';
-            
-            photoHTML += '<img src="' + photo.url_m + '"></li>';
-          });
-            photoHTML += '</ul>';
-          $('#photos').html(photoHTML);
-          */
-          /*for(var i = 0; i < data.photos.photo.length; i++){
-            for(var j = 0; j < data.photos.photo[i]; j++){
-              console.log([j]);
-            }
-            
-          }*/
-
         });
       
     };
-    
-   
-    
+
   
-  //--------------------------------------------------------------
+ //==============================================================
   
-  //  Check image size 
+  //  Huvudstad
+  //  Hämtar ut alla länders huvudstad från restcountrys Api
   
-  
-  
-  
-  
-  
-  //--------------------------------------------------------------
-  
-  //--------------------------------Capital City-----------------
-  
-  var capitalList = [];
-  var option = "";
+  var capitalList = []; // Sparar alla huvudstäder i denna array
+  var option = "";  //  Alla select värden sparas i denna variabel
   
   $.get("https://restcountries.eu/rest/v1/all", function(data){
+    
     for(var i = 0; i < data.length; i++){
+      // Får ut alla huvudstäder och lägger till dem i capitalList
       capitalList.push(data[i].capital);
     };
     
-    
+    // Här tar jag bort alla tomma värden.
     capitalList = capitalList.filter(Boolean).sort();
-    //console.log(capitalList.sort().length);
-    
-    //console.log(capitalList);
+
     
     for(var i = 0; i < capitalList.length; i++){
+      // Här lägger jag till alla select värden
       option += '<option value="' + capitalList[i] + '">' + capitalList[i] + '</option>';
     };
     
-
-    $('#item').append(option);
+    // Här lägger jag till alla huvudstäder i select boxen
+    $('#capitalCitys').append(option);
     
-
-  });
+  });  // <--- get request end
   
-  $('#item').change(function(){
-    var capitalC = $('#item').val();
-    getCity(capitalC);
-    getImages(capitalC);
-    //console.log(capitalC);
+  // Här uppdateras värdet beroende på vad som väljs i select boxen
+  $('#capitalCitys').change(function(){
+    var capitalC = $('#capitalCitys').val();
+    getWeather(capitalC);
+    getImages(capitalC);;
   });
   
   
