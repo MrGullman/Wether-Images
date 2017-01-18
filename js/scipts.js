@@ -264,7 +264,9 @@ $(document).ready(function(){
   
   $(".container").click(function(){
     $(this).toggleClass("change");
-    
+    $('#overlay').toggle("slow", function(){
+      
+    })
   });
  
   

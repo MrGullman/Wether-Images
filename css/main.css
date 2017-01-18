@@ -76,6 +76,7 @@ header {
 }
 
 .logo img {
+  height: 2em;
   width: 90%
 }
 
@@ -90,22 +91,23 @@ option {
 }
 
 select {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	-o-appearance: none;
-	-ms-appearance: none;
-	appearance: none;
-	margin-top: 5px;
-	display: block;
-	width: 70%;
-	font-size: 1.3em;
-	padding: 5px 50px 5px 10px;
-	background: url(../img/arrow_select.svg) no-repeat 95% center;
-	background-size: 0.7em;
-	align-self: center;
-	color: #fff;
-	border: none;
-	background-color: #4d4d4d;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  margin-top: 5px;
+  margin-left: 1em;
+  display: block;
+  width: 70%;
+  font-size: 1.3em;
+  padding: 5px 50px 5px 10px;
+  background: url(../img/arrow_select.svg) no-repeat 95% center;
+  background-size: 0.7em;
+  align-self: flex-start;
+  color: #fff;
+  border: none;
+  background-color: #4d4d4d;
 }
 
 option {
@@ -120,12 +122,14 @@ option {
   display: inline-block;
   cursor: pointer;
   position: absolute;
+  right: 15px;
+  top: 49px;
 }
 
 .bar1, .bar2, .bar3 {
   width: 35px;
   height: 5px;
-  background-color: #fff;
+  background-color: #f08f00;
   margin: 6px 0;
   transition: 0.4s;
   right: 100;
@@ -246,8 +250,7 @@ li {
 
 .weather-icon img {
   align-self: center;
-  height: 70%;
-  width: auto;
+  height: 70%
 }
 
 .weather-description {
