@@ -77,12 +77,9 @@ $(document).ready(function(){
       function forecastWeather(icon){
         console.log(icon);
         for(var i = 0; i < weatherCondition.length; i++){
-          
-          //console.log(data.forecast.forecastday[i].day.condition.code);
+
           if(icon === weatherCondition[i].code){
             return weatherCondition[i].day
-            //console.log(weatherCondition[i].day); 
-            //console.log(weatherCondition[i].day);
           }else{
             
           }
@@ -92,12 +89,9 @@ $(document).ready(function(){
       
       
       weatherIcon(iconType, dayOrNight);
-      //console.log(iconType);
-      //getIcon(iconType, dayOrNight);
       getWetherCondition(iconType, dayOrNight);
       getImages(city, dayOrNight);
       getWindDirection(windDir);  // Get the wind direction
-      //console.log(iconType);
       upcomingWeather(iconType); // <- Skickar typ of icon till upcomingWeather
       
       //----------------------------------------
@@ -262,6 +256,17 @@ $(document).ready(function(){
     getImages(capitalC);;
   });
   
+  //==============================================================
+  // Sid funktionalitet/animationer
+  
+  // Animera Burger Button
+  
+  
+  $(".container").click(function(){
+    $(this).toggleClass("change");
+    
+  });
+ 
   
 
 });

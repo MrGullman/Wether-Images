@@ -8,9 +8,13 @@
       <link rel="stylesheet" href="css/normalize.css">
       <link rel="stylesheet" href="css/animate.css">
       <link rel="stylesheet" href="css/main.css">
+      <link rel="stylesheet" href="css/responsiv.css">
     </head>
 
   <body>
+    
+    
+<!-- ====================== Main Header ======================== -->
     <div class="site-wrapper">
       <header class="top-header">
         <div class="logo">
@@ -20,18 +24,38 @@
             <option value="" disabled selected>Välj En Stad</option>
         </select>
       </header>
+<!-- ===================== Sticky Header ========================= -->
+     <!-- <header class="top-header">
+        <div class="logo">
+            <img src="img/logo.svg">
+        </div>
+        <select id="capitalCitys">
+            <option value="" disabled selected>Välj En Stad</option>
+        </select>
+      </header> -->
     
+<!-- ===================== Main Content ========================= -->
     
       <div id="main-content">
         <div id="photos"></div>
       </div>
     </div>
     
-
+<!-- ==================== Overlay ========================== -->
 
     <div id="overlay">
       <div class="overlay-header">
+        
         <img src="img/logo.svg">
+        
+        <!-- Burger Button -->
+        <div class="container" onclick="myFunction(this)">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
+        </div>
+        <!------------------>
+        
       </div>
       <div class="info">
         <div class="info-header">
@@ -58,7 +82,7 @@
       </div>
     </div>
     
-    
+<!-- ============================================== -->
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="js/weatherCondition.js"></script>

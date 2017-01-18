@@ -1,8 +1,49 @@
+/*****************************************************
+
+MAIN CSS
+Skapad 2017-01-10
+
+Denna CSS fil är en del av ett tentamens arbete
+Webaplikationsutveckling
+
+ *** Lernia YHJUST16 ***
+
+Skapad av Jesper Gullman
+
+******************************************************/
+
+
+/******************************************
+EMBEDDED FONTS
+******************************************/
+
+
+@font-face {
+  font-family: 'GalanoGrotesque-Light';
+  src:  url('fonts/GalanoGrotesque-Light.otf')  format('opentype'),
+	    url('fonts/GalanoGrotesque-Light.woff')  format('woff'), 
+        url('fonts/GalanoGrotesque-Light.ttf')  format('truetype'), 
+        url('fonts/GalanoGrotesque-Light.svg#GalanoGrotesque-Light') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+/*******************************************
+  GENERAL
+********************************************/
+
+* {
+  box-sizing: border-box;
+}
+
 html, body {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
+  border: 0;
 }
 
 .site-wrapper {
@@ -10,25 +51,32 @@ html, body {
   flex-direction: column;
 }
 
+/*******************************************
+  HEADER CONTENT
+********************************************/
+
+
 header {
   display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+  flex-direction: column;
+  position: fixed;
+  width: 100%;
   top: 0px;
   left: 0px;
   height: 100px;
   background: #333;
-  width: 100%;
+  z-index: 300;
 }
 
 .logo {
-	align-self: center;
-	margin-left: 2em;
+  width: 100%;
+  margin-top: 0.6em;
+  align-self: center;
+  text-align: center;
 }
 
 .logo img {
-	height: 4em;
-	width: auto;
+  width: 90%
 }
 
 select:required:invalid {
@@ -41,8 +89,74 @@ option {
   color: black;
 }
 
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-o-appearance: none;
+	-ms-appearance: none;
+	appearance: none;
+	margin-top: 5px;
+	display: block;
+	width: 70%;
+	font-size: 1.3em;
+	padding: 5px 50px 5px 10px;
+	background: url(../img/arrow_select.svg) no-repeat 95% center;
+	background-size: 0.7em;
+	align-self: center;
+	color: #fff;
+	border: none;
+	background-color: #4d4d4d;
+}
+
+option {
+  color: #fff;
+  font-size: 0.7em;
+}
+
+/*******************************************
+  BURBER BUTTON
+********************************************/
+.container {
+  display: inline-block;
+  cursor: pointer;
+  position: absolute;
+}
+
+.bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: #fff;
+  margin: 6px 0;
+  transition: 0.4s;
+  right: 100;
+}
+
+/* Rotera första strecket */
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+/* Fada ut det andra strecket */
+.change .bar2 {
+  opacity: 0;
+}
+
+/* Rotera sista strecket */
+.change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+
+
+
+/*******************************************
+  MAIN CONTENT
+********************************************/
+
 #main-content {
   display: flex;
+  margin-top: 100px;
 }
 
 img {
@@ -58,30 +172,7 @@ img {
   
 }
 
-select {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	-o-appearance: none;
-	-ms-appearance: none;
-	appearance: none;
-	
-	display: block;
-	margin: 30px 2em;
-	width: 25%;
-	font-size: 1.5em;
-	padding: 10px 50px 10px 10px;
-	background: url(../img/arrow_select.svg) no-repeat 95% center;
-	background-size: 0.7em;
-	align-self: center;
-	color: #fff;
-	border: none;
-	background-color: #4d4d4d;
-}
 
-option {
-  color: #fff;
-  font-size: 0.7em;
-}
 
 ul {
   width: 100%;
@@ -100,34 +191,41 @@ li {
 	margin-bottom: -4px;
 }
 
+
+/*******************************************
+  OVERLAY
+********************************************/
+
+
 #overlay {
-	display: flex;
-	background: rgba(0,0,0, 0.85);
-	position: fixed;
-	display: flex;
-	flex-direction: column;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%,-50%);
-	min-width: 600px;
-	height: 450px;
-	z-index: 1000;
+  display: flex;
+  background: rgba(0,0,0, 0.85);
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%,-50%);
+  width: 80%;
+  height: 420px;
+  z-index: 100;
 }
 
 .overlay-header {
-	display: flex;
-	background-color: rgba(0,0,0, 0.8);
-	width: 100%;
-	height: 70px;
+  display: flex;
+  background-color: rgba(0,0,0, 0.8);
+  width: 100%;
+  height: 70px;
+  min-height: 60px;
 }
 
 .overlay-header img {
-	margin: auto;
-	width: 70%;
+  margin: auto;
+  width: 70%;
 }
 
 .info-header {
-  padding-top: 1.2em;
+  padding-top: 0.7em;
   display: flex;
   flex-direction: column;
   
@@ -138,12 +236,18 @@ li {
   flex-direction: row;
   justify-content: space-between;
   padding-top: 1em;
-  padding-left: 15%;
-  padding-right: 15%;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.weather-icon {
+  display: flex;
 }
 
 .weather-icon img {
-  
+  align-self: center;
+  height: 70%;
+  width: auto;
 }
 
 .weather-description {
@@ -152,38 +256,41 @@ li {
 }
 
 #city {
-	align-self: center;
-	color: #fff;
-	font-size: 3em;
-}
-
-#country {
+  font-family: 'GalanoGrotesque-Light';
+  font-style: normal;
+  font-weight: normal;
   align-self: center;
-  padding-bottom: 6px;
-  padding-left: 1em;
   color: #fff;
   font-size: 1.5em;
 }
 
-#country::before {
-  content: '"';
+#country {
+  font-family: 'GalanoGrotesque-Light';
+  font-style: normal;
+  font-weight: normal;
+  align-self: center;
+  padding-bottom: 6px;
+  color: #fff;
+  font-size: 1.2em;
 }
 
-#country::after {
-  content: '"';
-}
 
 .description {
+  font-family: 'GalanoGrotesque-Light';
+  font-style: normal;
+  font-weight: normal;
   color: #fff;
-  font-size: 1.7em;
+  font-size: 1.4em;
   text-align: right;
 }
 
 .temp {
+  font-family: 'GalanoGrotesque-Light';
+  font-style: normal;
+  font-weight: normal;
   color: #fff;
   text-align: right;
   font-size: 1.5em;
-  padding-top: 0.3em;
 }
 
 .temp::after {
@@ -205,18 +312,17 @@ li {
 .wind-direction img{
   position: absolute;
   width: 13px;
-  /*padding-right: 15px;
-  padding-top: 10px;
-  transform-origin: 50% 50%;*/
   top: 10px;
   right: 10px;
 }
 
 .wind {
+  font-family: 'GalanoGrotesque-Light';
+  font-style: normal;
+  font-weight: normal;
   color: #fff;
   text-align: right;
   font-size: 1.5em;
-  padding-top: 0.3em;
 }
 
 .wind::after {
@@ -255,6 +361,10 @@ li {
   display: none;
 }
 
+#comingForecast li:last-child {
+  display: none;
+}
+
 #comingForecast li h3 {
   font-size: 0.7em;
   margin-bottom: 0;
@@ -269,3 +379,4 @@ li {
   content: " \2103";
   font-size: 0.8em
 }
+
