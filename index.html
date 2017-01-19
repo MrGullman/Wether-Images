@@ -3,7 +3,9 @@
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Jquery Test Page</title>
+      <title>Weather Image</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
       <link rel="stylesheet" href="css/normalize.css">
       <link rel="stylesheet" href="css/animate.css">
@@ -25,7 +27,7 @@
         </select>
         
         <!-- Burger Button -->
-        <div class="container change" onclick="myFunction(this)">
+        <div class="container-burger change" onclick="myFunction(this)">
           <div class="bar1"></div>
           <div class="bar2"></div>
           <div class="bar3"></div>
@@ -72,12 +74,37 @@
         <div id="comingForecast">
         </div>
         
+      </div>  <!-- / end info -->
+    </div>  <!-- / end overlay -->
+    
+    <!-- ==================== Footer using Bootstrap ========================== -->
+    
+    <footer class="container">
+      <div class="row">
+        <div class="col-s-12 col-md-4">
+          <h2 class="text-center">API som används på denna sida</h2>
+          <ul>
+            <li><a href="https://www.apixu.com/"><img src="img/apixu_logo.png"></a></li>
+            <li><a href="https://restcountries.eu/"><img src="img/REST-logo.png"></a></li>
+            <li><a href="https://ipapi.co/"><img src="img/ipapi_logo.png"></a></li>
+            <li><a href="https://www.flickr.com/"><img src="img/Flickr_logo.png"></a></li>
+          </ul>
+        </div>
+        <div class="col-s-12 col-md-5 offset-md-3">
+          <h3 class="text-center">Denna sidan är en del i min tentamen i Webaplickations Utveckling</h3>
+          <ul class="social">
+            <li><a href="https://github.com/MrGullman/Wether-Images"><img src="img/git.svg"></a></li>
+            <li><a href="https://www.facebook.com/jesper.gullman"><img src="img/fb.svg"></a></li>
+            <li><a href="https://www.linkedin.com/in/jesper-gullman-55188267?trk=hp-identity-name"><img src="img/li.svg"></a></li>
+          </ul>
+        </div>
       </div>
-    </div>
+    
+    </footer>  <!-- / end container -->
     
 <!-- ============================================== -->
-    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="js/weatherCondition.js"></script>
     <script src="js/windDirection.js"></script>
     <script src="js/scipts.js"></script>

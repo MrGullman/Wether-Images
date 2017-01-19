@@ -72,8 +72,16 @@ select {
   display: block;
 }
   
-.container {
+.container-burger {
   top: 30px;
+}
+  
+.container {
+  min-height: 225px;
+}
+  
+.social li {
+  width: 8%;
 }
 
   
