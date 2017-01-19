@@ -36,7 +36,7 @@ JS DOM manipulation, Bootstrap användning, AJAX Requests,.
 ***
 
 ###### Länkar till mina sidor
-[Länk till detta projektet] (https://mrgullman.github.io/Wether-Images/)
+[Länk till detta projektet] (https://mrgullman.github.io/Wether-Images/) <br>
 [Länk till min LinkedIn] (https://www.linkedin.com/in/jesper-gullman-55188267?trk=hp-identity-name) <br>
 [Min hemsida] (http://gullman.net/) <br>
 Created By: [Jesper Gullman](https://github.com/MrGullman)
