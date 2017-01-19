@@ -348,7 +348,8 @@ footer ul li img {
 .description {
   font-family: 'GalanoGrotesque-Light';
   font-style: normal;
-  font-weight: normal;
+
+	font-weight: normal;
   color: #fff;
   font-size: 1.2em;
   text-align: right;
@@ -411,6 +412,7 @@ footer ul li img {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  padding: 0 0 0 0;
 }
 
 #comingForecast li {
