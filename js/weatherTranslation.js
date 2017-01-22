@@ -1,1 +1,0 @@
-http://www.apixu.com/doc/conditions.json

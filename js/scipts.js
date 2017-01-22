@@ -6,16 +6,19 @@ $(document).ready(function(){
   
   
   $.getJSON("https://ipapi.co/json/", function(data){
-      country = data.country;
+      // Hämtar ut vilket land du befinner dig i med hjlp av ditt ipnummer
+      // Sparar landet i variablen country
+      var country = data.country;
+      // skickar landet till funktionen getCurrentCountryCapitalCity
       getCurrentCountryCapitalCity(country);
     });
   
   function getCurrentCountryCapitalCity(countryCode){
+    // Hämtar vilken huvudstad det är i det landet du befinner dig i
     $.get("https://restcountries.eu/rest/v1/alpha?codes=" + countryCode + "", function(data){
       var currentCapitalCity = data[0].capital;
-      
+      // skickar huvudstadens namn till getWeather
       getWeather(currentCapitalCity);
-      console.log(data);
     })
   }
   
@@ -26,38 +29,41 @@ $(document).ready(function(){
   
   
  function getWeather(city){
-
+      // Hämtar vder data från apixus api
     $.get("https://api.apixu.com/v1/forecast.json?key=e5c6bcdb884f449e97904419171101&q=" + city +"&days=5", function(data){
-      console.log(data);
-      var weatherType = data.current.condition.text;
+
+      var weatherType = data.current.condition.text;  // <- Hämtar väder informations text
       var wind = data.current.wind_kph/3.6; // <- Hämtar ut vilken vindhastighet och gör om den till meter/sec
       var windDir = data.current.wind_dir;  // <- Hämtar ut värdet för vilken vindriktning
       var iconType = data.current.condition.code;   //  <-  Hämtar ut vilken icon som är till vädret
       var dayOrNight = data.current.is_day;   //  <-  Hämtar om det är dag eller natt
 
-      $('#city').text(data.location.name);
-      $('#country').text(data.location.country);
-      $('.temp').text(data.current.temp_c);
-      $('.description').text(data.current.condition.text);
+      $('#city').text(data.location.name);  // <- Skriver ut Huvudstadens namn till id taggen city
+      $('#country').text(data.location.country);  // <- Skriver ut Landet till id taggen country
+      $('.temp').text(data.current.temp_c); // <- Skriver ut temperaturen till class taggen temp
+      $('.description').text(data.current.condition.text);  // <- Skriver ut väder beskrivningen till class taggen description 
       $('.wind').text(wind.toFixed(1)); //  <- Sätter antalet decimaler i vindhastigheten till 1
       
       
       function weatherIcon(iconNumber, dayOrNight){
-        //console.log(iconNumber);
+        // Denna funktionen ändra vder iconen efter vilken typ av vder det är
         for(var i = 0; i < weatherCondition.length; i++){
+          // Här kollar man om det är dag eller natt
           if(dayOrNight === 1){
-            
+              
             if(iconNumber === weatherCondition[i].code){
-              //console.log(weatherCondition[i].code);
+              // Här kollar jag om det är tilldelt en väder ikon eller inte
               if($('.weather-icon').has('img')){
+                // om det är det så raderas den befintliga
                 $('.weather-icon img').remove();
+                // och ersätt med den som gäller för stunden
                 $('.weather-icon').append('<img src="' + weatherCondition[i].day + '">');
               } else {
                 $('.weather-icon').append('<img src="' + weatherCondition[i].day + '">');
               }
             }
           } else {
-            
+            // Samma process här fast för om det är natt
             if(iconNumber === weatherCondition[i].code){
               
               if($('.weather-icon').has('img')){
@@ -66,16 +72,16 @@ $(document).ready(function(){
               } else {
                 $('.weather-icon').append('<img src="' + weatherCondition[i].night + '">');
               }
-            }
+            } // <- end if
             
-          }
-        }
+          } // <- end else
+        } // <- end for loop
         
-      }
+      } // <- end function weatherIcon
       
       
       function forecastWeather(icon){
-        console.log(icon);
+        // Denna funktionen sätter väder ikconen fr komman de dagar
         for(var i = 0; i < weatherCondition.length; i++){
 
           if(icon === weatherCondition[i].code){
@@ -88,7 +94,7 @@ $(document).ready(function(){
       }
       
       
-      weatherIcon(iconType, dayOrNight);
+      weatherIcon(iconType, dayOrNight);  // Skickar ikon typ samt om det är natt eller dag för att få ut vilken ikon som skall vara
       getWetherCondition(iconType, dayOrNight);
       getImages(city, dayOrNight);
       getWindDirection(windDir);  // Get the wind direction
@@ -96,43 +102,27 @@ $(document).ready(function(){
       
       //----------------------------------------
       //  kommande 3 dagars väder
-              
-      
-      
-      
-      
+
         
         function upcomingWeather(iconType){
-          //$('#comingForecast').remove();
-          console.log("denna körs");
-          
+          // Funktion för att kolla vilken det kommande vädret är
           var comingDayForecast = "<ul>";
 
             for(var i = 0; i < data.forecast.forecastday.length; i++){
+              //  loopar igenom forcastDay för att få ut vilken ikon som skall användas
+              // sätter vilken ikon kod det är till iconTypeForecast
               var iconTypeForecast = data.forecast.forecastday[i].day.condition.code;
-              
-              //console.log(data.forecast.forecastday[i].day.condition.code);
               comingDayForecast += "<li>";
               comingDayForecast += '<img src="' + forecastWeather(iconTypeForecast) + '">';
               comingDayForecast += "<h3>" + data.forecast.forecastday[i].date + "</h3>";
               comingDayForecast += '<p class="forecast-temp">' + data.forecast.forecastday[i].day.avgtemp_c + '</p>';
-
               comingDayForecast += "</li>";
-              
-              //console.log(data.forecast.forecastday[i]);
             }
-
+            // Sluter ul taggen
             comingDayForecast += "</ul>";
-          
+            // Skriver ut vilken iconkod det är till forecastWeather
             forecastWeather(iconTypeForecast);
-          
-          
-
-            //$('.info').append('<div id="comingForecast"></div>');
-            
-            //$('#comingForecast').html(comingDayForecast);
-            
-            
+            // Skriver ut kommande väder till id taggen comingForecast
             $('#comingForecast').html(comingDayForecast);
         }
         
@@ -141,18 +131,6 @@ $(document).ready(function(){
     })  // <- end AJAX get function
  }  // <- end getWeather function
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
 
  //==============================================================
   
@@ -161,7 +139,7 @@ $(document).ready(function(){
   //  Samt att vi kollar om det är dag eller natt.
   
   function getWetherCondition(code, dayOrNight){
-    
+    // apixu api som håller i väderförhållandena på svenska
     $.get("https://www.apixu.com/doc/conditions.json", function(data){
       
       for(var i = 0; i < data.length; i++){
@@ -181,27 +159,24 @@ $(document).ready(function(){
   // Get Flicker Images
   
     
-    function getImages(weather){
-      
-        var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=9bb1ef3285f869282ecc5e8ff9526ad5&per_page=100&tags=" + weather + "&extras=url_c%2C+url_m%2C+url_q"
-        
-        var weather = weather;
-
+    function getImages(capitalCity){
+        // Flickr api hr hämtar vi bilderna 
+        var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=9bb1ef3285f869282ecc5e8ff9526ad5&per_page=100&tags=" + capitalCity + "&extras=url_c%2C+url_m%2C+url_q"
+        // Här stter vi värder på capitalCity beroende på vad som väljs
+        var capitalCity = capitalCity;
+        // Här skapar vi en JSON callback funktion
         $.getJSON(url + "&format=json&jsoncallback=?", function(data){
 
-          
+          // Här skapar jag en image array med bilder från flickr som har de mått jag vill ha.
           var imageArray = [];
-         //console.log(data);
-          // check image size
           for(var i = 0; i < data.photos.photo.length; i++){
             for(var i in data.photos.photo){
-              //console.log(data.photos.photo[i].width_m)
-              
+              // Här kollar vi så att bild proportionen är 500x333px om det är det så lggs de till i arrayn
               if(data.photos.photo[i].width_m === "500" && data.photos.photo[i].height_m === "333"){
                 imageArray.push(data.photos.photo[i].url_m)
               }
             }       
-          }
+          } // <- end for loop
           
  
           

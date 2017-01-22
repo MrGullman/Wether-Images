@@ -1,3 +1,6 @@
+//  Här kollar vi vilket håll det blåser 
+// så att jag kan animera vindriktnings pilen
+
 var degree = 0;
   
   function getWindDirection(direction){

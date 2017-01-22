@@ -116,7 +116,7 @@ option {
 }
 
 /*******************************************
-  BURBER BUTTON
+  BURGER BUTTON
 ********************************************/
 .container-burger {
   display: inline-block;
@@ -222,6 +222,11 @@ footer h3 {
   font-style: normal;
   font-weight: normal;
   font-size: 1.3em;
+}
+
+.copyright {
+  color: #fff;
+  text-align: center;
 }
 
 footer ul {

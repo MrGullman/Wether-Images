@@ -4,11 +4,13 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Weather Image</title>
+      <!-- ====================== Bootstrap ======================== -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-
+      <!-- ====================== jQuery ======================== -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      <!-- ====================== Normalize ======================== -->
       <link rel="stylesheet" href="css/normalize.css">
-      <link rel="stylesheet" href="css/animate.css">
+      <!-- ====================== Egen Css ======================== -->
       <link rel="stylesheet" href="css/main.css">
       <link rel="stylesheet" href="css/responsiv.css">
     </head>
@@ -33,35 +35,36 @@
           <div class="bar3"></div>
         </div>
         <!------------------>
-      </header>
+      </header> <!-- / end header -->
     
 <!-- ===================== Main Content ========================= -->
     
       <div id="main-content">
         <div id="photos"></div>
-      </div>
-    </div>
+      </div> <!-- / end main-content -->
+    </div> <!-- / end site-wrapper -->
     
 <!-- ==================== Overlay ========================== -->
 
     <div id="overlay">
-      <div class="overlay-header">
-        
+      <div class="overlay-header">     
         <img src="img/logo.svg">
-        
-        
-        
       </div>
       <div class="info">
+        
         <div class="info-header">
           <div id="city"></div>
           <div id="country"></div>
         </div>
+        
         <div class="weather-info">
+          
           <div class="weather-icon"></div>
+          
           <div class="weather-description">
             <div class="description"></div>
             <div class="temp"></div>
+            
             <div class="wind-wrapper">
               <div class="wind-direction">
                 <img src="img/arrow.svg">
@@ -69,7 +72,7 @@
               <div class="wind"></div>
             </div>
           </div>
-        </div>
+        </div>  <!-- / end weather-info -->
         
         <div id="comingForecast">
         </div>
@@ -91,18 +94,19 @@
           </ul>
         </div>
         <div class="col-s-12 col-md-5 offset-md-3">
-          <h3 class="text-center">Denna sidan är en del i min tentamen i Webaplickations Utveckling</h3>
+          <h3 class="text-center">Denna sidan är en del i min tentamen i Webaplickations Utveckling, Ni kan nå mig på dessa olkia sidor.</h3>
           <ul class="social">
             <li><a href="https://github.com/MrGullman/Wether-Images"><img src="img/git.svg"></a></li>
             <li><a href="https://www.facebook.com/jesper.gullman"><img src="img/fb.svg"></a></li>
             <li><a href="https://www.linkedin.com/in/jesper-gullman-55188267?trk=hp-identity-name"><img src="img/li.svg"></a></li>
           </ul>
+          <p class="copyright">&copy; Jesper Gullman 2017</p>
         </div>
       </div>
     
-    </footer>  <!-- / end container -->
+    </footer>  <!-- / end footer container -->
     
-<!-- ============================================== -->
+<!-- ====================== Scripts ======================== -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="js/weatherCondition.js"></script>

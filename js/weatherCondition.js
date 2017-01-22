@@ -1,3 +1,5 @@
+//  Här har jag skapat ett objekt med alla olika väderförhållande och lagt till egna bild ikoner till dem.
+
 var weatherCondition = [
   
   {
