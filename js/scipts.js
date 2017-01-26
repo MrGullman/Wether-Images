@@ -249,7 +249,8 @@ $(document).ready(function(){
   
   $(document).ajaxStart(function(){
     $("#loading-page").show();
-    $("#main-content").append("#loading-page");
+    //$("#main-content").append("#loading-page");
+    $("#loaing-page").append('<img src="..img/loading-content.svg">');
     
   });
   
