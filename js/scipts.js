@@ -243,6 +243,21 @@ $(document).ready(function(){
       
     })
   });
+  
+  
+  // När Siddan Laddar AJAX
+  
+  $(document).ajaxStart(function(){
+    $("#loading-page").show();
+    $("#main-content").append("#loading-page");
+    
+  });
+  
+  $(document).ajaxStop(function(){
+    $("#overlay").css("display", "flex");
+    $("#loading-page").hide();
+    $("#loading-page").remove();
+  });
  
   
 
