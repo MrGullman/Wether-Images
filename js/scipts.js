@@ -248,16 +248,13 @@ $(document).ready(function(){
   // När Siddan Laddar AJAX
   
   $(document).ajaxStart(function(){
-    $("#loading-page").show();
-    //$("#main-content").append("#loading-page");
-    $("#loaing-page").append('<img src="..img/loading-content.svg">');
-    
+    $("#loading-page").show().delay(500);
+    $("#overlay").hide();
   });
   
   $(document).ajaxStop(function(){
     $("#overlay").css("display", "flex");
-    $("#loading-page").hide();
-    $("#loading-page").remove();
+    $("#loading-page").hide().delay(1500);
   });
  
   
